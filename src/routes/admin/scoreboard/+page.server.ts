@@ -1,6 +1,17 @@
 import { db } from '$lib/server/database';
+import { redirect } from '@sveltejs/kit';
 
-export const load = async (req: Request, res: Response) => {
+export const load = async ({ cookies }) => {
+	const token = cookies.get('token')
+    if (!token) {
+        throw redirect(302, '/signin')
+    }
+
+    const email = jwt.verify(token, import.meta.env.VITE_JWTSECRET).email
+    const user = await db.user.findUnique({ where: { email }})
+    if (!user) {
+        throw redirect(302, '/')
+    }
 	
 		try {
 			const contestants = await db.contestant.findMany({
@@ -84,5 +95,13 @@ export const actions = {
 		});
 
 		return { contestant };
+	},
+
+	logout: ({ cookies }) => {
+		// byebye cookie
+		cookies.delete('token', { path: '/' })
+
+		// redirect the user
+		throw redirect(302, '/')
 	},
 }
