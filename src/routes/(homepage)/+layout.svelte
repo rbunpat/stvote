@@ -17,7 +17,7 @@
             ></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path
                 d="M18 2H6v7a6 6 0 0 0 12 0V2Z"
             ></path></svg
-        ><span>Voting Dashboard</span></a
+        ><span>ผลการเลือกตั้งประธานนักเรียน (LIVE)</span></a
     >
 </header>
 

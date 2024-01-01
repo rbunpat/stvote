@@ -116,14 +116,14 @@
 		class="flex min-h-[calc(100vh-_theme(spacing.16))] flex-1 flex-col gap-4 bg-gray-100/40 p-4 md:gap-8 md:p-10"
 	>
 		<div class="mx-auto flex w-full max-w-6xl items-center gap-4">
-			<h1 class="text-2xl font-bold">Contestant Rankings</h1>
+			<h1 class="text-2xl font-bold">Vote Rankings</h1>
 		</div>
 		<div class="mx-auto grid w-full max-w-6xl gap-6">
 			<div class="container mx-auto">
 				<div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2">
 					<div class="rounded bg-white p-4 shadow">
 						{#each contestantsWithPercentage as { name, percentage, votes, image }}
-							<div class="bg-card text-card-foreground rounded-lg border shadow-md">
+							<div class="bg-card text-card-foreground rounded-lg border shadow-md mb-3">
 								<div class="flex flex-row items-center gap-4 space-y-1.5 p-6">
 									<span class="relative flex h-16 w-16 shrink-0 overflow-hidden rounded-full">
 										<span
