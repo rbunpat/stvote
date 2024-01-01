@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+    import autoAnimate from "@formkit/auto-animate"
 	import '../../../app.css';
     export let data;
     $: bruh = data;
@@ -75,7 +76,7 @@
                                 </form>
                                 </td> 
 
-                                <td class="px-4 py-3">{votes}</td>
+                                <td use:autoAnimate class="px-4 py-3">{votes}</td>
                             </tr>
 
                             

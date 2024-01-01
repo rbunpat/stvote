@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+    import autoAnimate from "@formkit/auto-animate"
 	import '../../app.css';
     export let data;
     let bruh = data;

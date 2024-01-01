@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import '../../app.css';
 	import Chart from 'chart.js/auto';
+	import autoAnimate from "@formkit/auto-animate"
 
 	let chart: any;
 
@@ -121,11 +122,11 @@
 		<div class="mx-auto grid w-full max-w-6xl gap-6">
 			<div class="container mx-auto">
 				<div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2">
-					<div class="rounded bg-white p-4 shadow">
+					<div use:autoAnimate class="rounded bg-white p-4 shadow">
 						{#each contestantsWithPercentage as { name, percentage, votes, image }}
 							<div class="bg-card text-card-foreground rounded-lg border shadow-md mb-3">
 								<div class="flex flex-row items-center gap-4 space-y-1.5 p-6">
-									<span class="relative flex h-16 w-16 shrink-0 overflow-hidden rounded-full">
+									<span  class="relative flex h-16 w-16 shrink-0 overflow-hidden rounded-full">
 										<span
 											class="bg-muted flex h-full w-full items-center justify-center rounded-full"
 										>
