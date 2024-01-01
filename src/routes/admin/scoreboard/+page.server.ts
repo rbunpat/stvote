@@ -1,5 +1,6 @@
 import { db } from '$lib/server/database';
 import { redirect } from '@sveltejs/kit';
+import jwt from 'jsonwebtoken';
 
 export const load = async ({ cookies }) => {
 	const token = cookies.get('token')
