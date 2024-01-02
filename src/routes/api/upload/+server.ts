@@ -15,6 +15,7 @@ export const POST = async ({ request }) => {
         return json({ message: 'Missing required parameters.' }, { status: 400 });
     }
 
+
     const objectKey = `${slugifyString(Date.now().toString())}-${slugifyString(fileName)}`;
 
     const presignedUrl = await getSignedUrl(S3, new PutObjectCommand({
