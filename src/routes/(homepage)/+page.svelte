@@ -167,7 +167,6 @@
 	});
 
 	onDestroy(() => {
-		// Unsubscribe from real-time updates when the component is unmounted
 		supabase.removeAllChannels();
 	});
 </script>
