@@ -1,5 +1,4 @@
 <script lang="ts">
-
 	import { onMount, onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { createClient } from '@supabase/supabase-js';
@@ -10,7 +9,8 @@
 	import '../../app.css';
 
 	const supabaseUrl = 'https://mpibovldubkdqttudkdu.supabase.co';
-	const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1waWJvdmxkdWJrZHF0dHVka2R1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQxMTA1MTgsImV4cCI6MjAxOTY4NjUxOH0.UFL1SVBNIv_VL9Sd6Caq0HYQe0XhvFCI5Yj9fLoy-YY';
+	const supabaseKey =
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1waWJvdmxkdWJrZHF0dHVka2R1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQxMTA1MTgsImV4cCI6MjAxOTY4NjUxOH0.UFL1SVBNIv_VL9Sd6Caq0HYQe0XhvFCI5Yj9fLoy-YY';
 
 	const supabase = createClient(supabaseUrl, supabaseKey);
 
@@ -19,13 +19,12 @@
 	const totalVotesToShow = writable(0);
 
 	const contestantsTable = 'Contestant';
-	
-	let chart: HTMLCanvasElement | Chart<"doughnut", any[], any>;
+
+	let chart: HTMLCanvasElement | Chart<'doughnut', any[], any>;
 
 	let contestantsListener;
 
 	let contestantsWithPercentage: any = [];
-
 
 	const calculatePercentage = (votes: number, totalVotes: number) => {
 		return ((votes / totalVotes) * 100).toFixed(2);
@@ -90,14 +89,26 @@
 			.subscribe();
 
 		const totalVotes = $contestants.reduce((total, contestant) => total + contestant.votes, 0);
+
 		contestantsWithPercentage = $contestants.map((contestant) => ({
 			...contestant,
 			percentage: calculatePercentage(contestant.votes, totalVotes)
 		}));
 
-		contestants.set(contestantsWithPercentage);
-		contestantsWithPercentage.sort((a, b) => b.votes - a.votes);
+		// Sort contestantsWithPercentage, pinning id 8 and 7 to the bottom
+		contestantsWithPercentage.sort((a, b) => {
+			// Move id 8 and 7 to the bottom
+			if (a.id === 7 || a.id === 8) {
+				return 1; // Move a to the bottom
+			} else if (b.id === 7 || b.id === 8) {
+				return -1; // Move b to the bottom
+			}
 
+			// Sort other contestants by votes
+			return b.votes - a.votes;
+		});
+
+		contestants.set(contestantsWithPercentage);
 		totalVotesToShow.set(totalVotes);
 
 		//charts
