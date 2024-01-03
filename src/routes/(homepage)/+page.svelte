@@ -98,9 +98,9 @@
 		// Sort contestantsWithPercentage, pinning id 8 and 7 to the bottom
 		contestantsWithPercentage.sort((a, b) => {
 			// Move id 8 and 7 to the bottomasd
-			if (a.id === 7 || a.id === 8) {
+			if (a.name === "ไม่ออกเสียง" || a.name === "บัตรเสีย") {
 				return 1; // Move a to the bottom
-			} else if (b.id === 7 || b.id === 8) {
+			} else if (b.name === "บัตรเสีย" || b.name === "ไม่ออกเสียง") {
 				return -1; // Move b to the bottom
 			}
 
