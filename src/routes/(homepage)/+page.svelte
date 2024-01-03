@@ -15,15 +15,17 @@
 	const supabase = createClient(supabaseUrl, supabaseKey);
 
 	const contestants = writable([]);
+	const chartData = writable([]);
+	const totalVotesToShow = writable(0);
 
 	const contestantsTable = 'Contestant';
-
 	
 	let chart: HTMLCanvasElement | Chart<"doughnut", any[], any>;
 
 	let contestantsListener;
 
 	let contestantsWithPercentage: any = [];
+
 
 	const calculatePercentage = (votes: number, totalVotes: number) => {
 		return ((votes / totalVotes) * 100).toFixed(2);
@@ -79,6 +81,9 @@
 
 					updateChart();
 
+					//set total votes
+					totalVotesToShow.set(totalVotes);
+
 					return contestantsWithPercentage;
 				});
 			})
@@ -92,6 +97,8 @@
 
 		contestants.set(contestantsWithPercentage);
 		contestantsWithPercentage.sort((a, b) => b.votes - a.votes);
+
+		totalVotesToShow.set(totalVotes);
 
 		//charts
 		const ctx = document.getElementById('chart').getContext('2d');
@@ -170,7 +177,7 @@
 		class="flex min-h-[calc(100vh-_theme(spacing.16))] flex-1 flex-col gap-4 bg-gray-100/40 p-4 md:gap-8 md:p-10"
 	>
 		<div class="mx-auto flex w-full max-w-6xl items-center gap-4">
-			<h1 class="text-2xl font-bold">Vote Rankings</h1>
+			<h1 class="text-2xl font-bold">Total Votes : {$totalVotesToShow}</h1>
 		</div>
 		<div class="mx-auto grid w-full max-w-6xl gap-6">
 			<div class="container mx-auto">
