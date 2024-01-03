@@ -97,7 +97,7 @@
 
 		// Sort contestantsWithPercentage, pinning id 8 and 7 to the bottom
 		contestantsWithPercentage.sort((a, b) => {
-			// Move id 8 and 7 to the bottom
+			// Move id 8 and 7 to the bottomasd
 			if (a.id === 7 || a.id === 8) {
 				return 1; // Move a to the bottom
 			} else if (b.id === 7 || b.id === 8) {
